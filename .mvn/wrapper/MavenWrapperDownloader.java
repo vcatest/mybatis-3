@@ -53,6 +53,8 @@ public final class MavenWrapperDownloader {
             System.err.println("- Error downloading: " + e.getMessage());
             if (VERBOSE) {
                 e.printStackTrace();
+
+                
             }
             System.exit(1);
         }
