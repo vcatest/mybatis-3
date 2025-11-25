@@ -94,7 +94,7 @@
     <dependency>
       <groupId>cglib</groupId>
       <artifactId>cglib</artifactId>
-      </dependency>
+      <version>3.3.0</version> </dependency>
   </dependencies>
 
 </project>
