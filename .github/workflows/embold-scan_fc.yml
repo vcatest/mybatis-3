@@ -27,9 +27,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # Step 3: Build the project and run SpotBugs
-      - name: Build with Maven and Run Analysis
-        run: mvn -B clean verify -DskipTests
+      # Step 3: (Optional) Prime dependencies only – full build skipped per request
+      - name: Prepare Maven dependencies (no build)
+        run: mvn -B -q dependency:go-offline
 
       # Step 4: Download and extract the Embold scanner
       - name: Download and Extract Scanner
@@ -37,7 +37,7 @@ jobs:
           curl ${{ vars.EMBOLD_SCANNER_URL }} -o browserstack-codequality-scanner-archive.tar.gz
           tar xvf browserstack-codequality-scanner-archive.tar.gz
 
-      ## Step 5: Download the repository configuration file
+      # Step 5: Download the repository configuration file
       - name: Download Repository Configuration
         run: |
           curl --silent --location --request GET "${{ vars.EMBOLD_URL_JAVA }}/api/v1/repositories/ed90e3be6660aecdd71ceb2aa7f8306d/scans/config/download" --header "Authorization: Bearer ${{ secrets.EMBOLD_TOKEN_JAVA }}" -o repository-configuration.json
